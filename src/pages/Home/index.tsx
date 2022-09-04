@@ -4,6 +4,7 @@ import {
     Text,
     StyleSheet,
     FlatList,
+    ListRenderItemInfo
 } from "react-native"
 
 import { Header } from "../../components/Header"
@@ -37,7 +38,7 @@ const list = [
 
 export function Home() {
 
-    const renderItemList = ({item}) => {
+    const renderItemList = ({item}: any) => {
 
         return(
             <Text>
@@ -56,7 +57,7 @@ export function Home() {
             <FlatList
                 data={list}
                 renderItem={renderItemList}
-                keyExtractor={(item) => item.id}            
+                keyExtractor={(item) => item.label}            
             />
 
         </View>
