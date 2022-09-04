@@ -5,7 +5,12 @@ import {
     StyleSheet,
 } from "react-native"
 
-export const Balance = ({ earnings, outlay }) => {
+type Props = {
+    earnings: string,
+    outlay: string
+}
+
+export const Balance = ({ earnings, outlay }: Props) => {
 
     return (
         <View style={styles.container}>
