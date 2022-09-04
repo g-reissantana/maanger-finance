@@ -34,7 +34,8 @@ export function Home() {
 
     return (
         <View style={styles.container}>
-            
+            <Header name="gabriel reis" />
+
             <Text style={styles.title}>Últimas movimentações</Text>
 
         </View>
