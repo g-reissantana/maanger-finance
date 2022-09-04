@@ -9,29 +9,30 @@ import {
 
 import { Header } from "../../components/Header"
 import { Balance } from "../../components/Balance"
+import { Transactions } from "../../components/Transactions"
+import { Actions } from "../../components/Actions"
 
-
-const list = [
+const list: any = [
     {
         id: 1,
         date: '17/08/2022',
         label: "Boleto conta de água",
         type: 0, // outlay
-        value: '300'
+        value: '180'
     },
     {
         id: 2,
         date: '21/08/2022',
         label: "Boleto conta de de luz",
         type: 0, // outlay
-        value: '3450'
+        value: '220'
     },
     {
         id: 3,
         date: '22/08/2022',
-        label: "Pix Luiza",
+        label: "Salário",
         type: 1, // earnings
-        value: '450'
+        value: '4.500'
     },
 ]
 
@@ -41,9 +42,7 @@ export function Home() {
     const renderItemList = ({item}: any) => {
 
         return(
-            <Text>
-                {item.label}
-            </Text>
+            <Transactions data={item} />
         )
     }
 
@@ -51,13 +50,17 @@ export function Home() {
         <View style={styles.container}>
             <Header name="gabriel reis" />
 
-            <Balance earnings="3.550,00" outlay="2.000,00" />
-            <Text style={styles.title}>Últimas movimentações</Text>
+            <Balance earnings="4.100,00" outlay="400" />
 
+            <Actions />
+
+            <Text style={styles.title}>Últimas movimentações</Text>
             <FlatList
                 data={list}
                 renderItem={renderItemList}
-                keyExtractor={(item) => item.label}            
+                keyExtractor={(item) => String(item.id)}            
+                style={styles.list}
+                showsVerticalScrollIndicator={false}
             />
 
         </View>
@@ -67,13 +70,12 @@ export function Home() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#f2f2f2"
+        backgroundColor: "#f6f6f6"
     },
     title: {
-        fontSize: 18,
+        fontSize: 24,
         fontWeight: "bold",
-        marginHorizontal: 16,
-        marginTop: 16
+        margin: 16
     },
     list: {
 

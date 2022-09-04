@@ -35,10 +35,10 @@ export const Balance = ({ earnings, outlay }: Props) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: -24,
+        marginTop: -28,
         flexDirection: "row",
         marginHorizontal: 16,
-        paddingHorizontal: 15,
+        paddingHorizontal: 24,
         paddingVertical: 28,
         justifyContent: "space-between",
         borderRadius: 6,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 
     },
     itemTitle: {
-        fontSize: 24,
+        fontSize: 26,
         color: "#DADADA",
         marginBottom: 3,
         fontWeight: "bold"
