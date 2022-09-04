@@ -3,6 +3,7 @@ import {
     View,
     Text,
     StyleSheet,
+    FlatList,
 } from "react-native"
 
 import { Header } from "../../components/Header"
@@ -36,12 +37,27 @@ const list = [
 
 export function Home() {
 
+    const renderItemList = ({item}) => {
+
+        return(
+            <Text>
+                {item.label}
+            </Text>
+        )
+    }
+
     return (
         <View style={styles.container}>
             <Header name="gabriel reis" />
 
             <Balance earnings="3.550,00" outlay="2.000,00" />
             <Text style={styles.title}>Últimas movimentações</Text>
+
+            <FlatList
+                data={list}
+                renderItem={renderItemList}
+                keyExtractor={(item) => item.id}            
+            />
 
         </View>
     )
