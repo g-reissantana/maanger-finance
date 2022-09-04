@@ -5,6 +5,10 @@ import {
     StyleSheet,
 } from "react-native"
 
+import { Header } from "../../components/Header"
+import { Balance } from "../../components/Balance"
+
+
 const list = [
     {
         id: 1,
@@ -36,6 +40,7 @@ export function Home() {
         <View style={styles.container}>
             <Header name="gabriel reis" />
 
+            <Balance earnings="3.550,00" outlay="2.000,00" />
             <Text style={styles.title}>Últimas movimentações</Text>
 
         </View>
