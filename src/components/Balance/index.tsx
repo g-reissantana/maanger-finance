@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
 import {
     Text,
     View,
     StyleSheet,
+    TouchableOpacity
 } from "react-native"
 
 type Props = {
@@ -10,26 +11,69 @@ type Props = {
     outlay: string
 }
 
+import { MotiView, MotiText } from 'moti'
+
+
 export const Balance = ({ earnings, outlay }: Props) => {
 
+    const [showEarnings, setShowEarnings] = useState(false)
+    const [showOutlay, setShowOutlay] = useState(false)
+
     return (
-        <View style={styles.container}>
+        <MotiView
+            style={styles.container}
+            from={{
+                rotateX: "-120deg",
+                opacity: 0
+            }}
+            animate={{
+                rotateX: "0deg",
+                opacity: 1
+            }}
+            transition={{
+                type: "timing",
+                duration: 900,
+                delay: 300
+            }}
+        >
+
             <View style={styles.item}>
                 <Text style={styles.itemTitle}>Saldo</Text>
-                <View style={styles.content}>
-                    <Text style={styles.currencySymbol}>R$</Text>
-                    <Text style={styles.earnings}>{earnings}</Text>
-                </View>
+                <TouchableOpacity
+                    onPress={e => setShowEarnings(!showEarnings)}
+                    style={styles.handleShowValue}
+                >
+                    <View style={styles.content}>
+                        <Text style={styles.currencySymbol}>R$</Text>
+
+                        {showEarnings ? (
+                            <Text style={styles.earnings}>{earnings}</Text>
+                        ) : (
+                            <View style={styles.skeleton}>
+                            </View>
+                        )}
+                    </View>
+                </TouchableOpacity>
             </View>
 
             <View style={styles.item}>
                 <Text style={styles.itemTitle}>Gastos</Text>
-                <View style={styles.content}>
-                    <Text style={styles.currencySymbol}>R$</Text>
-                    <Text style={styles.outlay}>{outlay}</Text>
-                </View>
+                <TouchableOpacity
+                    onPress={e => setShowOutlay(!showOutlay)}
+                    style={styles.handleShowValue}
+                >
+                    <View style={styles.content}>
+                        <Text style={styles.currencySymbol}>R$</Text>
+                        {showOutlay ? (
+                            <Text style={styles.outlay}>{outlay}</Text>
+                        ) : (
+                            <View style={styles.skeleton}>
+                            </View>
+                        )}
+                    </View>
+                </TouchableOpacity>
             </View>
-        </View>
+        </MotiView>
     )
 }
 
@@ -42,11 +86,11 @@ const styles = StyleSheet.create({
         paddingVertical: 28,
         justifyContent: "space-between",
         borderRadius: 6,
-        zIndex: 99,
+        zIndex: 2,
         backgroundColor: "#FFF",
     },
     item: {
-
+        maxWidth: 120
     },
     itemTitle: {
         fontSize: 26,
@@ -58,6 +102,7 @@ const styles = StyleSheet.create({
     content: {
         flexDirection: "row",
         alignItems: "center",
+        height: "80%",
     },
     currencySymbol: {
         color: "#DADADA",
@@ -70,5 +115,16 @@ const styles = StyleSheet.create({
     outlay: {
         fontSize: 26,
         color: "#e74c3c",
+    },
+    skeleton: {
+        width: 100,
+        height: 20,
+        borderRadius: 8,
+        backgroundColor: "#DADADA",
+    },
+    handleShowValue: {
+        height: 30,
+        width: 120,
+        justifyContent: "center",
     }
 })

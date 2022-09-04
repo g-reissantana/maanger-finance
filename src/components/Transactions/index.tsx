@@ -7,6 +7,7 @@ import {
     View
 } from "react-native"
 
+import { MotiView, AnimatePresence, MotiText } from "moti"
 
 export const Transactions = ({ data }: any) => {
 
@@ -23,21 +24,45 @@ export const Transactions = ({ data }: any) => {
                     {data.label}
                 </Text>
 
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.handleShowValue}
                     onPress={e => setShowValue(!showValue)}
                 >
                     {showValue ? (
-                        <Text
-                            style={data.type === 1 ? styles.earnings : styles.outlay}
-                        >
-                            {data.type === 1 ? `R$ ${data.value}`: `R$ -${data.value}`}
-                        </Text>
+                        <AnimatePresence exitBeforeEnter>
+                            <MotiText
+                                style={data.type === 1 ? styles.earnings : styles.outlay}
+                                from={{
+                                    translateX: 100
+                                }}
+                                animate={{
+                                    translateX: 0
+                                }}
+                                transition={{
+                                    type: "spring",
+                                    
+                                }}
+                            >
+                                {data.type === 1 ? `R$ ${data.value}` : `R$ -${data.value}`}
+                            </MotiText>
+                        </AnimatePresence>
                     ) : (
-                        <View
-                            style={styles.skeleton}
-                        >
-                        </View>
+                        <AnimatePresence exitBeforeEnter>
+                            <MotiView
+                                style={styles.skeleton}
+                                from={{
+                                    opacity: 0
+                                }}
+                                animate={{
+                                    opacity: 1
+                                }}
+                                transition={{ 
+                                    type: "timing" ,
+                                    duration: 100
+                                }}
+                            >
+                            </MotiView>
+                        </AnimatePresence>
                     )
                     }
                 </TouchableOpacity>

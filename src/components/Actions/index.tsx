@@ -8,7 +8,7 @@ import {
 
 import { AntDesign } from "@expo/vector-icons"
 
-export const Actions = () => {
+export const Actions = ({ toggleModal }: any) => {
 
     const listIcons = [
         {
@@ -45,7 +45,11 @@ export const Actions = () => {
         >
 
             {listIcons.map((item: any, index: number) => (
-                <TouchableOpacity style={styles.actionButton}>
+                <TouchableOpacity 
+                    onPress={e => toggleModal(true)} 
+                    key={index} 
+                    style={styles.actionButton}
+                >
                     <View style={styles.areaButton}>
                         <AntDesign name={item.name} size={26} color="#000" />
                     </View>
